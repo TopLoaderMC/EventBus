@@ -8,6 +8,7 @@ plugins {
     jacoco
     `maven-publish`
     id("me.champeau.jmh") version "0.6.5"
+    id("com.github.hierynomus.license") version "0.16.1"
 }
 
 the<org.parchmentmc.writtenbooks.WrittenBooksExtension>().apply {
@@ -106,6 +107,14 @@ jmh {
     iterations.set(3)
     fork.set(3)
     timeUnit.set("ns")
+}
+
+license {
+    header = rootProject.file("LICENSE-Header")
+    ext["year"] = 2016
+    mapping("java", "SLASHSTAR_STYLE")
+
+    include("**/*.java")
 }
 
 publishing {

@@ -1,18 +1,18 @@
 package net.minecraftforge.eventbus.test;
 
-import net.minecraftforge.eventbus.ListenerList;
-import net.minecraftforge.eventbus.api.BusBuilder;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.testjar.DummyEvent;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicLong;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.RepeatedTest;
 import org.powermock.reflect.Whitebox;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicLong;
+import net.minecraftforge.eventbus.ListenerList;
+import net.minecraftforge.eventbus.api.BusBuilder;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.testjar.DummyEvent;
 
 public class ParallelEventTest
 {

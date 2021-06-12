@@ -19,16 +19,34 @@
 
 package net.minecraftforge.eventbus;
 
-import net.minecraftforge.eventbus.api.*;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Type;
-
-import java.lang.reflect.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.WildcardType;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.objectweb.asm.Opcodes.*;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Type;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.IEventListener;
+import net.minecraftforge.eventbus.api.IGenericEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import static org.objectweb.asm.Opcodes.ACC_PUBLIC;
+import static org.objectweb.asm.Opcodes.ACC_SUPER;
+import static org.objectweb.asm.Opcodes.ALOAD;
+import static org.objectweb.asm.Opcodes.CHECKCAST;
+import static org.objectweb.asm.Opcodes.GETFIELD;
+import static org.objectweb.asm.Opcodes.INVOKESPECIAL;
+import static org.objectweb.asm.Opcodes.INVOKESTATIC;
+import static org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
+import static org.objectweb.asm.Opcodes.PUTFIELD;
+import static org.objectweb.asm.Opcodes.RETURN;
+import static org.objectweb.asm.Opcodes.V1_6;
 
 public class ASMEventHandler implements IEventListener
 {
@@ -40,7 +58,7 @@ public class ASMEventHandler implements IEventListener
 
     private final IEventListener handler;
     private final SubscribeEvent subInfo;
-    private String readable;
+    private final String readable;
     private java.lang.reflect.Type filter = null;
 
     public ASMEventHandler(Object target, Method method, boolean isGeneric) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
@@ -187,7 +205,7 @@ public class ASMEventHandler implements IEventListener
         }
     }
 
-    public String toString()
+    @Override public String toString()
     {
         return readable;
     }

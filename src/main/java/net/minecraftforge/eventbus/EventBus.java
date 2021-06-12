@@ -19,30 +19,47 @@
 
 package net.minecraftforge.eventbus;
 
-import net.jodah.typetools.TypeResolver;
-import net.minecraftforge.eventbus.api.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import net.jodah.typetools.TypeResolver;
+import net.minecraftforge.eventbus.api.BusBuilder;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventListenerHelper;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.GenericEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.IEventBusInvokeDispatcher;
+import net.minecraftforge.eventbus.api.IEventExceptionHandler;
+import net.minecraftforge.eventbus.api.IEventListener;
+import net.minecraftforge.eventbus.api.IGenericEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import static net.minecraftforge.eventbus.LogMarkers.EVENTBUS;
 
 public class EventBus implements IEventExceptionHandler, IEventBus {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final boolean checkTypesOnDispatch = Boolean.parseBoolean(System.getProperty("eventbus.checkTypesOnDispatch", "false"));
-    private static AtomicInteger maxID = new AtomicInteger(0);
+    private static final AtomicInteger maxID = new AtomicInteger(0);
     private final boolean trackPhases;
 
 
-    private ConcurrentHashMap<Object, List<IEventListener>> listeners = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Object, List<IEventListener>> listeners = new ConcurrentHashMap<>();
     private final int busID = maxID.getAndIncrement();
     private final IEventExceptionHandler exceptionHandler;
     private volatile boolean shutdown = false;

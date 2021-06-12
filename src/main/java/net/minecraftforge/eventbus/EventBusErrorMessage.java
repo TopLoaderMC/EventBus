@@ -1,12 +1,12 @@
 package net.minecraftforge.eventbus;
 
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.eventbus.api.IEventListener;
-import org.apache.logging.log4j.message.Message;
-import org.apache.logging.log4j.util.StringBuilderFormattable;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
+import org.apache.logging.log4j.message.Message;
+import org.apache.logging.log4j.util.StringBuilderFormattable;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.IEventListener;
 
 public class EventBusErrorMessage implements Message, StringBuilderFormattable {
     private final Event event;

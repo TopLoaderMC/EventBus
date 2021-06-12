@@ -1,26 +1,37 @@
 package net.minecraftforge.eventbus.test;
 
-import cpw.mods.modlauncher.Launcher;
-import cpw.mods.modlauncher.TransformingClassLoader;
-import net.minecraftforge.eventbus.ListenerList;
-import net.minecraftforge.eventbus.api.BusBuilder;
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.eventbus.api.EventListenerHelper;
-import net.minecraftforge.eventbus.api.IEventBus;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.config.Configurator;
-import org.apache.logging.log4j.spi.LoggerContext;
-import org.junit.jupiter.api.*;
-import org.powermock.reflect.Whitebox;
-
 import java.time.Duration;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.apache.logging.log4j.LogManager;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.RepeatedTest;
+import org.powermock.reflect.Whitebox;
+import cpw.mods.modlauncher.Launcher;
+import cpw.mods.modlauncher.TransformingClassLoader;
+import net.minecraftforge.eventbus.api.BusBuilder;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventListenerHelper;
+import net.minecraftforge.eventbus.api.IEventBus;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeadlockingEventTest {
     private static final boolean initializeAtClassloading = false;

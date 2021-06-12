@@ -1,9 +1,9 @@
 package net.minecraftforge.eventbus;
 
+import java.util.function.Supplier;
+
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventListener;
-
-import java.util.function.Supplier;
 
 public class NamedEventListener implements IEventListener {
     public static final boolean DEBUG = Boolean.parseBoolean(System.getProperty("eventbus.namelisteners", "false"));

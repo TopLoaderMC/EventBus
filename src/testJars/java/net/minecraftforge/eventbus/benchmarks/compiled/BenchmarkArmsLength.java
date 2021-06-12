@@ -1,10 +1,10 @@
 package net.minecraftforge.eventbus.benchmarks.compiled;
 
-import net.minecraftforge.eventbus.api.BusBuilder;
-import net.minecraftforge.eventbus.api.IEventBus;
-
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
+
+import net.minecraftforge.eventbus.api.BusBuilder;
+import net.minecraftforge.eventbus.api.IEventBus;
 
 public class BenchmarkArmsLength implements Callable<Void>
 {

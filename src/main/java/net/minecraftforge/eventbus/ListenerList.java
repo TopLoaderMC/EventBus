@@ -16,28 +16,26 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package net.minecraftforge.eventbus;
 
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.IEventListener;
-
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicReference;
+import javax.annotation.Nullable;
 
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.IEventListener;
 
 public class ListenerList
 {
-    private static List<ListenerList> allLists = new ArrayList<>();
+    private static final List<ListenerList> allLists = new ArrayList<>();
     private static int maxSize = 0;
 
     @Nullable
-    private ListenerList parent;
+    private final ListenerList parent;
     private ListenerListInst[] lists = new ListenerListInst[0];
 
     public ListenerList()
@@ -145,10 +143,10 @@ public class ListenerList
     {
         private boolean rebuild = true;
         private AtomicReference<IEventListener[]> listeners = new AtomicReference<>();
-        private ArrayList<ArrayList<IEventListener>> priorities;
+        private final ArrayList<ArrayList<IEventListener>> priorities;
         private ListenerListInst parent;
         private List<ListenerListInst> children;
-        private Semaphore writeLock = new Semaphore(1, true);
+        private final Semaphore writeLock = new Semaphore(1, true);
 
 
         private ListenerListInst()

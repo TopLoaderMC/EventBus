@@ -1,15 +1,16 @@
 package net.minecraftforge.eventbus.test;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import org.junit.jupiter.api.Test;
 import net.minecraftforge.eventbus.ListenerList;
 import net.minecraftforge.eventbus.api.BusBuilder;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventListenerHelper;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
-import org.junit.jupiter.api.Test;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AbstractEventListenerTest {
@@ -31,7 +32,7 @@ public class AbstractEventListenerTest {
         assertTrue(concreteSuperEventHandled.get(), "handled concrete super event");
         assertTrue(abstractSubEventHandled.get(), "handled abstract sub event");
         assertTrue(concreteSubEventHandled.get(), "handled concrete sub event");
-        assertTrue(ConcreteSubEvent.MERGED_STATIC_INIT == 100, "static init merge failed");
+        assertEquals(100, ConcreteSubEvent.MERGED_STATIC_INIT, "static init merge failed");
     }
 
     // Below, we simulate the things that are added by EventSubclassTransformer
@@ -43,7 +44,7 @@ public class AbstractEventListenerTest {
 
     public static class ConcreteSuperEvent extends AbstractSuperEvent {
 
-        private static ListenerList LISTENER_LIST = new ListenerList(EventListenerHelper.getListenerList(ConcreteSuperEvent.class.getSuperclass()));
+        private static final ListenerList LISTENER_LIST = new ListenerList(EventListenerHelper.getListenerList(ConcreteSuperEvent.class.getSuperclass()));
         public ConcreteSuperEvent() {}
 
         @Override
@@ -59,7 +60,7 @@ public class AbstractEventListenerTest {
 
     public static class ConcreteSubEvent extends AbstractSubEvent {
         protected static int MERGED_STATIC_INIT = 100;
-        private static ListenerList LISTENER_LIST = new ListenerList(EventListenerHelper.getListenerList(ConcreteSubEvent.class.getSuperclass()));
+        private static final ListenerList LISTENER_LIST = new ListenerList(EventListenerHelper.getListenerList(ConcreteSubEvent.class.getSuperclass()));
         public ConcreteSubEvent() {}
 
         @Override

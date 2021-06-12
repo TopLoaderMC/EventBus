@@ -19,7 +19,6 @@
 
 package net.minecraftforge.eventbus.api;
 
-
 /**
  * Event listeners are wrapped with implementations of this interface
  */

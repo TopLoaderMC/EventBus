@@ -4,7 +4,7 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventListener;
 
 public class TestListener implements IEventListener {
-    private Object instance;
+    private final Object instance;
 
     TestListener(Object instance) {
         this.instance = instance;

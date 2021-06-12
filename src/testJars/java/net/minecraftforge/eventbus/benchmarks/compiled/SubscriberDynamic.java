@@ -1,6 +1,5 @@
 package net.minecraftforge.eventbus.benchmarks.compiled;
 
-
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class SubscriberDynamic

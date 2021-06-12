@@ -19,14 +19,14 @@
 
 package net.minecraftforge.eventbus.api;
 
-import net.minecraftforge.eventbus.EventSubclassTransformer;
-import net.minecraftforge.eventbus.ListenerList;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import java.util.Objects;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import net.minecraftforge.eventbus.EventSubclassTransformer;
+import net.minecraftforge.eventbus.ListenerList;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

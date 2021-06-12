@@ -1,14 +1,14 @@
 package net.minecraftforge.eventbus.test;
 
+import java.util.function.Function;
+
+import org.junit.jupiter.api.Test;
 import net.minecraftforge.eventbus.api.BusBuilder;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
-import org.junit.jupiter.api.Test;
 
-import java.util.function.Function;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EventLambdaTest {
     boolean hit;

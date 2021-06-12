@@ -1,18 +1,17 @@
 package net.minecraftforge.eventbus.test;
 
-import cpw.mods.modlauncher.Launcher;
-import cpw.mods.modlauncher.api.ITransformingClassLoader;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.concurrent.Callable;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.config.Configurator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.powermock.reflect.internal.WhiteboxImpl;
+import cpw.mods.modlauncher.Launcher;
+import cpw.mods.modlauncher.api.ITransformingClassLoader;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.concurrent.Callable;
-
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BadEventDispatcherTest {

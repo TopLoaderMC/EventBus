@@ -19,18 +19,18 @@
 
 package net.minecraftforge.eventbus;
 
+import java.lang.reflect.Modifier;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
-
-import java.lang.reflect.Modifier;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import static net.minecraftforge.eventbus.LogMarkers.EVENTBUS;
 import static net.minecraftforge.eventbus.Names.SUBSCRIBE_EVENT;

@@ -19,8 +19,6 @@
 
 package net.minecraftforge.eventbus.api;
 
-import net.minecraftforge.eventbus.ListenerList;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
@@ -29,6 +27,8 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import net.minecraftforge.eventbus.ListenerList;
 
 public class EventListenerHelper
 {

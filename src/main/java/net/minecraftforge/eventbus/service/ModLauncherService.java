@@ -1,13 +1,12 @@
 package net.minecraftforge.eventbus.service;
 
-import cpw.mods.modlauncher.serviceapi.ILaunchPluginService;
-import net.minecraftforge.eventbus.EventBusEngine;
-import org.objectweb.asm.Type;
-import org.objectweb.asm.tree.ClassNode;
-
-import java.nio.file.Path;
 import java.util.EnumSet;
 import java.util.Objects;
+
+import org.objectweb.asm.Type;
+import org.objectweb.asm.tree.ClassNode;
+import cpw.mods.modlauncher.serviceapi.ILaunchPluginService;
+import net.minecraftforge.eventbus.EventBusEngine;
 
 public class ModLauncherService implements ILaunchPluginService {
     @Override

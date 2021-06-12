@@ -1,12 +1,12 @@
 package net.minecraftforge.eventbus.benchmarks;
 
-import cpw.mods.modlauncher.Launcher;
-import cpw.mods.modlauncher.TransformingClassLoader;
-import net.minecraftforge.eventbus.api.IEventBus;
-import org.powermock.reflect.Whitebox;
-
 import java.util.concurrent.Callable;
 
+import org.powermock.reflect.Whitebox;
+import cpw.mods.modlauncher.Launcher;
+import cpw.mods.modlauncher.TransformingClassLoader;
+
+@SuppressWarnings("unused")
 public class BenchmarkBootstrap
 {
     @SuppressWarnings("unchecked")

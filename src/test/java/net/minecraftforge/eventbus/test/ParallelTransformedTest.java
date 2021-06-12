@@ -1,13 +1,13 @@
 package net.minecraftforge.eventbus.test;
 
-import cpw.mods.modlauncher.Launcher;
-import cpw.mods.modlauncher.TransformingClassLoader;
+import java.util.concurrent.Callable;
+import java.util.concurrent.atomic.AtomicLong;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.RepeatedTest;
-
-import java.util.concurrent.Callable;
-import java.util.concurrent.atomic.AtomicLong;
+import cpw.mods.modlauncher.Launcher;
+import cpw.mods.modlauncher.TransformingClassLoader;
 
 public class ParallelTransformedTest {
     static final int LISTENER_COUNT = 1000;

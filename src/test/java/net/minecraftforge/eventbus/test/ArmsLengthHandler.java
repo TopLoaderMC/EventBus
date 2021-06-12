@@ -1,18 +1,18 @@
 package net.minecraftforge.eventbus.test;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.Callable;
+
+import org.apache.logging.log4j.LogManager;
+import org.junit.jupiter.api.Assertions;
+import org.powermock.reflect.Whitebox;
 import net.minecraftforge.eventbus.ListenerList;
 import net.minecraftforge.eventbus.api.BusBuilder;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.IEventListener;
 import net.minecraftforge.eventbus.testjar.DummyEvent;
-import org.apache.logging.log4j.LogManager;
-import org.junit.jupiter.api.Assertions;
-import org.powermock.reflect.Whitebox;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.Callable;
 
 public class ArmsLengthHandler implements Callable<Void> {
     @Override

@@ -1,7 +1,5 @@
 package net.minecraftforge.eventbus.api;
 
-import net.minecraftforge.eventbus.EventBus;
-
 import java.util.function.Consumer;
 
 /**
@@ -9,7 +7,7 @@ import java.util.function.Consumer;
  *
  * Register for events and post events.
  *
- * Contains factory methods to construct an instance {@link #create()} and {@link #create(IEventExceptionHandler)}
+ * Use {@link BusBuilder} to construct and instance
  */
 public interface IEventBus {
     /**

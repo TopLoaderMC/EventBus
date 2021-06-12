@@ -25,9 +25,9 @@ public class SubscriberLambda
 
     public static void register(IEventBus bus)
     {
-        bus.addListener(SubscriberLambda::onCancelableEvent);
-        bus.addListener(SubscriberLambda::onResultEvent);
-        bus.addListener(SubscriberLambda::onSimpleEvent);
+        bus.addListener(CancelableEvent.class, SubscriberLambda::onCancelableEvent);
+        bus.addListener(ResultEvent.class, SubscriberLambda::onResultEvent);
+        bus.addListener(EventWithData.class, SubscriberLambda::onSimpleEvent);
     }
 
     public static void onCancelableEvent(CancelableEvent event)

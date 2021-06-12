@@ -87,7 +87,6 @@ dependencies {
     implementation("org.apache.logging.log4j:log4j-api:2.11.+")
     implementation("cpw.mods:modlauncher:6.1.+:api")
     implementation("com.google.code.findbugs:jsr305:3.0.2")
-    api("net.jodah:typetools:0.8.+")
     jmhImplementation("cpw.mods:modlauncher:6.1.+")
     jmhImplementation("org.powermock:powermock-core:2.0.+")
     jmhImplementation("org.ow2.asm:asm:7.2")

@@ -51,10 +51,10 @@ public class BenchmarkArmsLength implements Callable<Void>
         return null;
     }
 
-    public static final Consumer<Void> postStatic = BenchmarkArmsLength::postStatic;
-    public static final Consumer<Void> postDynamic = BenchmarkArmsLength::postDynamic;
-    public static final Consumer<Void> postLambda = BenchmarkArmsLength::postLambda;
-    public static final Consumer<Void> postCombined = BenchmarkArmsLength::postCombined;
+    @SuppressWarnings("unused") public static final Consumer<Void> postStatic = BenchmarkArmsLength::postStatic;
+    @SuppressWarnings("unused") public static final Consumer<Void> postDynamic = BenchmarkArmsLength::postDynamic;
+    @SuppressWarnings("unused") public static final Consumer<Void> postLambda = BenchmarkArmsLength::postLambda;
+    @SuppressWarnings("unused") public static final Consumer<Void> postCombined = BenchmarkArmsLength::postCombined;
 
     public static void postStatic(Void nothing)
     {

@@ -19,6 +19,7 @@
 package net.minecraftforge.eventbus.api;
 
 import java.util.function.Consumer;
+import net.minecraftforge.eventbus.api.asm.Cancelable;
 
 /**
  * EventBus API.

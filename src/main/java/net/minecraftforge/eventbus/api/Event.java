@@ -19,6 +19,7 @@
 
 package net.minecraftforge.eventbus.api;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import java.util.Objects;
@@ -36,9 +37,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 public class Event
 {
-    @Retention(value = RUNTIME)
-    @Target(value = TYPE)
-    public @interface HasResult{}
 
     public enum Result
     {

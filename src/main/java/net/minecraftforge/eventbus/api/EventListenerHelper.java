@@ -104,8 +104,4 @@ public class EventListenerHelper
         }
     }
 
-    private static void clearAll() {
-        listeners.clear();
-        lock = new ReentrantReadWriteLock(true);
-    }
 }

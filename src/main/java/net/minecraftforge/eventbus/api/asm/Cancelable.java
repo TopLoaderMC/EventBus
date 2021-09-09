@@ -17,10 +17,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-package net.minecraftforge.eventbus.api;
+package net.minecraftforge.eventbus.api.asm;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+import net.minecraftforge.eventbus.api.Event;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -30,4 +32,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Retention(value = RUNTIME)
 @Target(value = TYPE)
+@Documented
 public @interface Cancelable{}

@@ -18,8 +18,9 @@
  */
 package net.minecraftforge.eventbus.testjar;
 
-import net.minecraftforge.eventbus.api.Cancelable;
+import net.minecraftforge.eventbus.api.asm.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.asm.HasResult;
 
 public class DummyEvent extends Event {
     public static class GoodEvent extends DummyEvent {}

@@ -19,8 +19,9 @@
 package net.minecraftforge.eventbus.benchmarks.compiled;
 
 import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.asm.HasResult;
 
-@Event.HasResult
+@HasResult
 public class ResultEvent extends Event
 {
 }

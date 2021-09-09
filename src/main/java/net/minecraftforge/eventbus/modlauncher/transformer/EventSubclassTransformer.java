@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-package net.minecraftforge.eventbus;
+package net.minecraftforge.eventbus.modlauncher.transformer;
 
 import java.util.Optional;
 
@@ -56,10 +56,10 @@ import static org.objectweb.asm.Opcodes.RETURN;
 import static org.objectweb.asm.Type.BOOLEAN_TYPE;
 import static org.objectweb.asm.Type.VOID_TYPE;
 import static net.minecraftforge.eventbus.LogMarkers.EVENTBUS;
-import static net.minecraftforge.eventbus.Names.CANCELLABLE;
-import static net.minecraftforge.eventbus.Names.HAS_RESULT;
-import static net.minecraftforge.eventbus.Names.LISTENER_LIST;
-import static net.minecraftforge.eventbus.Names.LISTENER_LIST_HELPER;
+import static net.minecraftforge.eventbus.modlauncher.transformer.Names.CANCELLABLE;
+import static net.minecraftforge.eventbus.modlauncher.transformer.Names.HAS_RESULT;
+import static net.minecraftforge.eventbus.modlauncher.transformer.Names.LISTENER_LIST;
+import static net.minecraftforge.eventbus.modlauncher.transformer.Names.LISTENER_LIST_HELPER;
 
 public class EventSubclassTransformer
 {

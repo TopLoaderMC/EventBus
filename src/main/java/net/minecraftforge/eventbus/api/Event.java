@@ -25,7 +25,7 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraftforge.eventbus.EventSubclassTransformer;
+import net.minecraftforge.eventbus.modlauncher.transformer.EventSubclassTransformer;
 import net.minecraftforge.eventbus.ListenerList;
 
 import static java.lang.annotation.ElementType.TYPE;

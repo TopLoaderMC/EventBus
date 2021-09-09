@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-package net.minecraftforge.eventbus;
+package net.minecraftforge.eventbus.modlauncher.transformer;
 
 import java.lang.reflect.Modifier;
 import java.util.Collections;
@@ -33,7 +33,7 @@ import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
 
 import static net.minecraftforge.eventbus.LogMarkers.EVENTBUS;
-import static net.minecraftforge.eventbus.Names.SUBSCRIBE_EVENT;
+import static net.minecraftforge.eventbus.modlauncher.transformer.Names.SUBSCRIBE_EVENT;
 
 public class EventAccessTransformer
 {

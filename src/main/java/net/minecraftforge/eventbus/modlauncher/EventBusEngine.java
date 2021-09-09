@@ -16,8 +16,11 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-package net.minecraftforge.eventbus;
+package net.minecraftforge.eventbus.modlauncher;
 
+import net.minecraftforge.eventbus.LogMarkers;
+import net.minecraftforge.eventbus.modlauncher.transformer.EventAccessTransformer;
+import net.minecraftforge.eventbus.modlauncher.transformer.EventSubclassTransformer;
 import org.apache.logging.log4j.LogManager;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Type;

@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-package net.minecraftforge.eventbus.service;
+package net.minecraftforge.eventbus.modlauncher.service;
 
 import java.util.EnumSet;
 import java.util.Objects;
@@ -24,7 +24,7 @@ import java.util.Objects;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.ClassNode;
 import cpw.mods.modlauncher.serviceapi.ILaunchPluginService;
-import net.minecraftforge.eventbus.EventBusEngine;
+import net.minecraftforge.eventbus.modlauncher.EventBusEngine;
 
 public class ModLauncherService implements ILaunchPluginService {
     @Override

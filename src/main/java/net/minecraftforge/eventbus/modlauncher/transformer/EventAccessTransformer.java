@@ -44,14 +44,15 @@ public class EventAccessTransformer
     {
         AtomicBoolean changes = new AtomicBoolean();
         classNode.methods.stream().
-                filter(m-> Optional.ofNullable(m.visibleAnnotations).
-                        orElse(Collections.emptyList()).
-                        stream().anyMatch(a->Objects.equals(a.desc, SUBSCRIBE_EVENT))).
-                peek(m->{if (Modifier.isPrivate(m.access)) illegalPrivateAccess(m, classNode);}).
-                filter(m->!Modifier.isPrivate(m.access)).
-                peek(mn->LOGGER.debug(EVENTBUS, "Transforming @SubscribeEvent method to public {}.{}", classNode.name, mn.name)).
-                peek($ -> classNode.access = changeAccess(classNode.access, changes)).
-                forEach(mn1 -> toPublic(mn1, changes));
+                filter(m-> Optional.ofNullable(m.visibleAnnotations)
+                                   .orElse(Collections.emptyList())
+                                   .stream()
+                                   .anyMatch(a->Objects.equals(a.desc, SUBSCRIBE_EVENT)))
+                         .peek(m->{if (Modifier.isPrivate(m.access)) illegalPrivateAccess(m, classNode);})
+                         .filter(m->!Modifier.isPrivate(m.access))
+                         .peek(mn->LOGGER.debug(EVENTBUS, "Transforming @SubscribeEvent method to public {}.{}", classNode.name, mn.name))
+                         .peek($ -> classNode.access = changeAccess(classNode.access, changes))
+                         .forEach(mn1 -> toPublic(mn1, changes));
         return changes.get();
     }
 

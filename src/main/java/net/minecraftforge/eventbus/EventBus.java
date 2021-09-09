@@ -53,8 +53,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import static net.minecraftforge.eventbus.LogMarkers.EVENTBUS;
 
-public class EventBus implements IEventExceptionHandler, IEventBus {
-    private static final Logger LOGGER = LogManager.getLogger();
+public class EventBus implements IEventBus {
+    static final Logger LOGGER = LogManager.getLogger();
     private static final boolean checkTypesOnDispatch = Boolean.parseBoolean(System.getProperty("eventbus.checkTypesOnDispatch", "false"));
     private static final AtomicInteger maxID = new AtomicInteger(0);
     private final boolean trackPhases;
@@ -69,17 +69,17 @@ public class EventBus implements IEventExceptionHandler, IEventBus {
 
     private EventBus()
     {
-        ListenerList.resize(busID + 1);
-        exceptionHandler = this;
-        this.trackPhases = true;
-        this.baseType = Event.class;
+        throw new IllegalStateException();
+        //ListenerList.resize(busID + 1);
+        //exceptionHandler = LoggingEventExceptionHandler.INSTANCE;
+        //this.trackPhases = true;
+        //this.baseType = Event.class;
     }
 
     private EventBus(final IEventExceptionHandler handler, boolean trackPhase, boolean startShutdown, Class<?> baseType)
     {
         ListenerList.resize(busID + 1);
-        if (handler == null) exceptionHandler = this;
-        else exceptionHandler = handler;
+        this.exceptionHandler = handler != null ? handler : LoggingEventExceptionHandler.INSTANCE;
         this.trackPhases = trackPhase;
         this.shutdown = startShutdown;
         this.baseType = baseType;
@@ -109,11 +109,11 @@ public class EventBus implements IEventExceptionHandler, IEventBus {
         typesFor(obj.getClass(), classes);
         Arrays.stream(obj.getClass().getMethods()).
                 filter(m->!Modifier.isStatic(m.getModifiers())).
-                forEach(m -> classes.stream().
-                        map(c->getDeclMethod(c, m)).
-                        filter(rm -> rm.isPresent() && rm.get().isAnnotationPresent(SubscribeEvent.class)).
-                        findFirst().
-                        ifPresent(rm->registerListener(obj, m, rm.get())));
+                forEach(m -> classes.stream()
+                                    .map(c->getDeclMethod(c, m))
+                                    .filter(rm -> rm.isPresent() && rm.get().isAnnotationPresent(SubscribeEvent.class))
+                                    .findFirst()
+                                    .ifPresent(rm->registerListener(obj, m, rm.get())));
     }
 
 
@@ -234,8 +234,8 @@ public class EventBus implements IEventExceptionHandler, IEventBus {
     private <T extends Event> Class<T> getEventClass(Consumer<T> consumer) {
         final Class<T> eventClass = (Class<T>) TypeResolver.resolveRawArgument(Consumer.class, consumer.getClass());
         if ((Class<?>)eventClass == TypeResolver.Unknown.class) {
-            LOGGER.error(EVENTBUS, "Failed to resolve handler for \"{}\"", consumer.toString());
-            throw new IllegalStateException("Failed to resolve consumer event type: " + consumer.toString());
+            LOGGER.error(EVENTBUS, "Failed to resolve handler for \"{}\"", consumer);
+            throw new IllegalStateException("Failed to resolve consumer event type: " + consumer);
         }
         return eventClass;
     }
@@ -261,9 +261,7 @@ public class EventBus implements IEventExceptionHandler, IEventBus {
     private <T extends Event> void doCastFilter(final Predicate<? super T> filter, final Class<T> eventClass, final Consumer<T> consumer, final Event e) {
         T cast = (T)e;
         if (filter.test(cast))
-        {
             consumer.accept(cast);
-        }
     }
 
     private void register(Class<?> eventType, Object target, Method method)
@@ -312,26 +310,16 @@ public class EventBus implements IEventExceptionHandler, IEventBus {
 
         IEventListener[] listeners = event.getListenerList().getListeners(busID);
         int index = 0;
-        try
-        {
-            for (; index < listeners.length; index++)
-            {
+        try {
+            for (; index < listeners.length; index++) {
                 if (!trackPhases && Objects.equals(listeners[index].getClass(), EventPriority.class)) continue;
                 wrapper.invoke(listeners[index], event);
             }
-        }
-        catch (Throwable throwable)
-        {
+        } catch (Throwable throwable) {
             exceptionHandler.handleException(this, event, listeners, index, throwable);
             throw throwable;
         }
         return event.isCancelable() && event.isCanceled();
-    }
-
-    @Override
-    public void handleException(IEventBus bus, Event event, IEventListener[] listeners, int index, Throwable throwable)
-    {
-        LOGGER.error(EVENTBUS, ()->new EventBusErrorMessage(event, index, listeners, throwable));
     }
 
     @Override

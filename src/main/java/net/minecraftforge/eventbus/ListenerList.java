@@ -51,7 +51,7 @@ public class ListenerList
         resizeLists(maxSize);
     }
 
-    private synchronized static void extendMasterList(ListenerList inst)
+    private static synchronized void extendMasterList(ListenerList inst)
     {
         allLists.add(inst);
     }
@@ -73,33 +73,14 @@ public class ListenerList
 
     private synchronized void resizeLists(int max)
     {
-        if (parent != null)
-        {
-            parent.resizeLists(max);
+        if (parent != null) parent.resizeLists(max);
+        if (lists.length >= max) return;
+
+        ListenerListInst[] newList = Arrays.copyOf(lists, max);
+        for(int x = lists.length; x < max; x++) {
+            newList[x] = parent != null ? new ListenerListInst(parent.getInstance(x)) : new ListenerListInst();
         }
 
-        if (lists.length >= max)
-        {
-            return;
-        }
-
-        ListenerListInst[] newList = new ListenerListInst[max];
-        int x = 0;
-        for (; x < lists.length; x++)
-        {
-            newList[x] = lists[x];
-        }
-        for(; x < max; x++)
-        {
-            if (parent != null)
-            {
-                newList[x] = new ListenerListInst(parent.getInstance(x));
-            }
-            else
-            {
-                newList[x] = new ListenerListInst();
-            }
-        }
         lists = newList;
     }
 
@@ -186,9 +167,9 @@ public class ListenerList
          * The list is returned with the listeners for the children events first.
          *
          * @param priority The Priority to get
-         * @return ArrayList containing listeners
+         * @return List containing listeners
          */
-        public ArrayList<IEventListener> getListeners(EventPriority priority)
+        public List<IEventListener> getListeners(EventPriority priority)
         {
             writeLock.acquireUninterruptibly();
             ArrayList<IEventListener> ret = new ArrayList<>(priorities.get(priority.ordinal()));
@@ -251,7 +232,7 @@ public class ListenerList
             ArrayList<IEventListener> ret = new ArrayList<>();
             Arrays.stream(EventPriority.values()).forEach(value -> {
                 List<IEventListener> listeners = getListeners(value);
-                if (listeners.size() > 0) {
+                if (!listeners.isEmpty()) {
                     ret.add(value); //Add the priority to notify the event of it's current phase.
                     ret.addAll(listeners);
                 }

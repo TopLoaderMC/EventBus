@@ -87,11 +87,11 @@ public class ThreadedListenerExceptionTest {
     public void beforeEach() throws Exception {
         failed = false;
         final List<Callable<Object>> callables = Collections.nCopies(50, Executors.callable(() -> testEventBus.addListener(ThreadedListenerExceptionTest::testEvent1)));
-        executorService.invokeAll(callables).stream().forEach(f->{
+        executorService.invokeAll(callables).forEach(f->{
             try {
                 // wait for everybody
                 f.get();
-            } catch (InterruptedException | ExecutionException e) {
+            } catch (InterruptedException | ExecutionException ignored) {
             }
         });
     }
@@ -104,11 +104,11 @@ public class ThreadedListenerExceptionTest {
 
     public void testListenerList() throws Exception {
         final List<Callable<Object>> callables = Collections.nCopies(100, Executors.callable(ThreadedListenerExceptionTest::generateEvents));
-        executorService.invokeAll(callables).stream().forEach(f->{
+        executorService.invokeAll(callables).forEach(f->{
             try {
                 // wait for everybody
                 f.get();
-            } catch (InterruptedException | ExecutionException e) {
+            } catch (InterruptedException | ExecutionException ignored) {
             }
         });
         assertFalse(failed);

@@ -32,7 +32,7 @@ import net.minecraftforge.eventbus.ListenerList;
 
 public class EventListenerHelper
 {
-    private final static Map<Class<?>, ListenerList> listeners = new IdentityHashMap<>();
+    private static final Map<Class<?>, ListenerList> listeners = new IdentityHashMap<>();
     private static ReadWriteLock lock = new ReentrantReadWriteLock(true);
     /**
      * Returns a {@link ListenerList} object that contains all listeners

@@ -93,6 +93,7 @@ dependencies {
     jmhImplementation("org.ow2.asm:asm:7.2")
     jmhImplementation("org.ow2.asm:asm-tree:7.2")
     jmhImplementation("org.ow2.asm:asm-commons:7.2")
+    jmh("org.apache.logging.log4j:log4j-core:2.11.+")
     jmh("org.ow2.asm:asm:7.2")
 }
 
@@ -108,6 +109,8 @@ jmh {
     fork.set(3)
     timeUnit.set("ns")
 }
+
+tasks.jmh { outputs.upToDateWhen { false } }
 
 license {
     header = rootProject.file("LICENSE-Header")
